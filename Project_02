@@ -1,0 +1,40 @@
+import random as rd
+import array
+
+MAX_Lenght=12
+DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+LOWERCASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i', 'j', 'k', 'm', 'n', 'o', 'p', 'q','r', 's', 't', 'u', 'v', 'w', 'x', 'y','z']
+UPCASE_CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I', 'J', 'K', 'M', 'N', 'O', 'p', 'Q','R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y','Z']
+SYMBOLS = ['@', '#', '$', '%', '=', ':', '?', '.', '/', '~','*']
+
+pas=input("ENTER YOUR PASSWORD : ")
+l=len(pas)
+if l<12  :
+    print("YOUR PASSWORD IS NOT STRONG...")
+    
+    # combines all the character arrays above to form one array
+    COMBINED_LIST = DIGITS + UPCASE_CHARACTERS + LOWERCASE_CHARACTERS + SYMBOLS
+    rand_digits=rd.choice(DIGITS)
+    rand_lower=rd.choice(LOWERCASE_CHARACTERS)
+    rand_Upper=rd.choice(UPCASE_CHARACTERS)
+    rand_sym=rd.choice(SYMBOLS)
+    
+    #At this stage we have only 4 characters password but we want atleast 8 characters
+    tmp_pass= rand_digits + rand_lower + rand_Upper +rand_sym
+    for i in range(MAX_Lenght -4):
+        tmp_pass=tmp_pass+ rd.choice(COMBINED_LIST)
+        tmp_pass_list= array.array('u',tmp_pass)
+        rd.shuffle(tmp_pass_list)
+        
+    #Now we have traverse the password
+    password =" "
+    for i in tmp_pass_list:
+        password+=i
+        
+    #Now displaying the suggested password 
+    print("YOUR PASSWORD IS ---> ",password)
+else:
+    print("YOUR PASSWORD IS STRONG NO NEED OF RECCOMENDATION...")
+
+
+        
